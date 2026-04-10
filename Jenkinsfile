@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "jenkins/jenkins:lts"
+        IMAGE_NAME = "node-app-todo"
+        CONTAINER_NAME = "node-app-container"
     }
 
     stages {
@@ -10,8 +11,7 @@ pipeline {
         stage('Clone Code') {
             steps {
                 git branch: 'main',
-                echo "Code Clone Stage"
-                git url: "https://github.com/Shubhamjadhavrao/todo-cicd-app.git"
+                url: "https://github.com/Shubhamjadhavrao/todo-cicd-app.git"
             }
         }
 
@@ -23,13 +23,13 @@ pipeline {
 
         stage('Remove Old Container') {
             steps {
-                sh 'docker rm -f node-app-container || true'
+                sh 'docker rm -f $CONTAINER_NAME || true'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 --name node-app-container $IMAGE_NAME'
+                sh 'docker run -d -p 8000:8000 --name $CONTAINER_NAME $IMAGE_NAME'
             }
         }
     }
