@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps CI/CD App</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #0f172a;
+            color: white;
+        }
+        h1 {
+            color: #38bdf8;
+        }
+        button {
+            padding: 10px 20px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🚀 CI/CD Pipeline Live</h1>
+<p>Deployed using Jenkins + Docker</p>
+
+<button onclick="loadData()">Check API</button>
+
+<p id="output"></p>
+
+<script>
+function loadData() {
+    fetch('/api/data')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("output").innerText =
+            data.message + " | Time: " + data.time;
+    });
+}
+</script>
+
+</body>
+</html>
