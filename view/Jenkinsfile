@@ -23,13 +23,13 @@ pipeline {
 
         stage('Remove Old Container') {
             steps {
-                sh 'docker rm -f devops-container || true'
+                sh 'docker rm -f node-app-container || true'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 --name devops-container $IMAGE_NAME'
+                sh 'docker run -d -p 8000:8000 --name node-app-container $IMAGE_NAME'
             }
         }
     }
