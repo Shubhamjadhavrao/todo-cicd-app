@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 
     // Route: Home Page
     if (req.url === '/') {
-        const filePath = path.join(__dirname, 'public', 'index.html');
+        const filePath = path.join(__dirname, 'view', 'index.html');
         fs.readFile(filePath, (err, data) => {
             if (err) {
                 res.writeHead(500);
