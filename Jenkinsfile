@@ -21,15 +21,19 @@ pipeline {
             }
         }
 
-        stage('Remove Old Container') {
+        stage('Clean Old Container') {
             steps {
-                sh 'docker rm -f $CONTAINER_NAME || true'
+                sh '''
+                docker rm -f $(docker ps -aq --filter "name=node-app-container") || true
+                '''
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 --name $CONTAINER_NAME $IMAGE_NAME'
+                sh '''
+                docker run -d -p 8000:8000 --name node-app-container node-app-todo
+                '''
             }
         }
     }
